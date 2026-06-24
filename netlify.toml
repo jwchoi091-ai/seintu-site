@@ -1,0 +1,13 @@
+# Netlify 배포 설정 — GitHub 연동 시 자동 적용됨
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA: 모든 경로를 index.html로 (추후 라우팅 도입 대비)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
