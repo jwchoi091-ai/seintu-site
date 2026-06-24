@@ -1,0 +1,117 @@
+.wrap {
+  background: var(--canvas-soft);
+  border-block: 1px solid var(--hairline);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+/* ---- 일러스트 장면 ---- */
+.visual {
+  margin: 0;
+}
+.scene {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: linear-gradient(180deg, #eaf5ff 0%, #f4fbef 55%, #eef7e6 100%);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--hairline);
+}
+.sun {
+  position: absolute;
+  top: 14%;
+  right: 16%;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe9a8, #ffd277);
+  box-shadow: 0 0 60px rgba(255, 210, 119, 0.7);
+}
+.hills span {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  border-radius: 50% 50% 0 0;
+}
+.hillBack {
+  bottom: 0;
+  height: 46%;
+  background: linear-gradient(180deg, #8fd29f, #6cbf83);
+}
+.hillFront {
+  bottom: 0;
+  height: 30%;
+  background: linear-gradient(180deg, #4ca266, #3d8d56);
+  left: -20% !important;
+  right: -5% !important;
+}
+.trees {
+  position: absolute;
+  bottom: 14%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  filter: drop-shadow(0 6px 10px rgba(182, 72, 114, 0.25));
+}
+
+.caption {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.84rem;
+  color: var(--ink-faint);
+}
+
+/* ---- copy ---- */
+.para {
+  margin-top: 20px;
+  color: var(--ink-2);
+  font-size: 1.04rem;
+  line-height: 1.85;
+}
+.para strong {
+  color: var(--blossom-700);
+  font-weight: 700;
+}
+
+.points {
+  display: grid;
+  gap: 14px;
+  margin-top: 32px;
+}
+.points li {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: #fff;
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  color: var(--ink-2);
+  font-size: 0.96rem;
+}
+.points strong {
+  font-weight: 700;
+  color: var(--green-700);
+}
+
+@media (max-width: 860px) {
+  .inner {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .points li {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

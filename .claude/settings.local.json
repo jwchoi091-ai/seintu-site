@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "PowerShell(node -v)",
+      "PowerShell(npm -v)",
+      "PowerShell($paths = @\\(\"$env:ProgramFiles\\\\nodejs\\\\node.exe\",\"${env:ProgramFiles\\(x86\\)}\\\\nodejs\\\\node.exe\",\"$env:LOCALAPPDATA\\\\Programs\\\\nodejs\\\\node.exe\",\"$env:APPDATA\\\\npm\\\\node.exe\"\\); foreach\\($p in $paths\\){ if\\(Test-Path $p\\){ Write-Output \"FOUND: $p\" } }; Get-Command nvm -ErrorAction SilentlyContinue | Select-Object Source; where.exe node 2>$null)",
+      "PowerShell(winget --version)",
+      "PowerShell(winget source list 2>$null)",
+      "PowerShell(winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements --silent)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); & \"$env:ProgramFiles\\\\nodejs\\\\node.exe\" -v; & \"$env:ProgramFiles\\\\nodejs\\\\npm.cmd\" -v)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\지웅\\\\클로드\\\\seintu-site\"; npm install 2>&1 | Select-Object -Last 15)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\지웅\\\\클로드\\\\seintu-site\"; npm approve-scripts esbuild 2>&1 | Select-Object -Last 5; Write-Output \"=== rebuild ===\"; npm rebuild esbuild 2>&1 | Select-Object -Last 5)",
+      "PowerShell($env:Path = [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"Path\",\"User\"\\); Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\지웅\\\\클로드\\\\seintu-site\"; npm run build 2>&1 | Select-Object -Last 25)"
+    ]
+  }
+}

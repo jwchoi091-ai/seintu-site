@@ -1,0 +1,48 @@
+.bar {
+  background: var(--green-50);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 0.8rem;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 38px;
+}
+
+.greet {
+  color: var(--ink-mute);
+}
+.greet strong {
+  color: var(--green-700);
+  font-weight: 700;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink-mute);
+}
+.links a {
+  transition: color 0.15s ease;
+}
+.links a:hover {
+  color: var(--green-700);
+}
+
+.sep {
+  width: 1px;
+  height: 11px;
+  background: var(--hairline-strong);
+}
+
+@media (max-width: 720px) {
+  .greet {
+    display: none;
+  }
+  .inner {
+    justify-content: flex-end;
+  }
+}
