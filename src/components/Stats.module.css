@@ -61,14 +61,14 @@
   gap: 3px;
 }
 .unit {
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--blossom-100);
   white-space: nowrap;
 }
 .plus {
   margin-left: 1px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #fff;
 }
