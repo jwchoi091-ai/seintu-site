@@ -64,7 +64,7 @@ export default function CategoryNav() {
           aria-label="메뉴 열기"
           onClick={() => setMobileOpen((v) => !v)}
         >
-          {mobileOpen ? <MenuIcon /> : <MenuIcon />}
+          {mobileOpen ? <CloseIcon /> : <MenuIcon />}
           <span>전체메뉴</span>
         </button>
       </div>

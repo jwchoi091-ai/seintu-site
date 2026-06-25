@@ -4,6 +4,7 @@ import TopBar from './TopBar'
 import Header from './Header'
 import CategoryNav from './CategoryNav'
 import Footer from './Footer'
+import FloatingContact from './FloatingContact'
 
 /** 라우트 변경 시 페이지 상단으로 스크롤 (해시 이동은 제외) */
 function ScrollToTop() {
@@ -34,6 +35,7 @@ export default function Layout() {
       </main>
 
       <Footer />
+      <FloatingContact />
     </>
   )
 }

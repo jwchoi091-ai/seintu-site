@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sweet-lamington-f73d5c.netlify.app/sitemap.xml
