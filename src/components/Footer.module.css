@@ -99,10 +99,23 @@
 }
 .legal .container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  flex-direction: column;
+  gap: 8px;
+}
+.biz {
+  display: flex;
   flex-wrap: wrap;
+  gap: 6px 14px;
+  font-feature-settings: 'tnum' 1;
+}
+.biz span {
+  position: relative;
+}
+.biz span:not(:last-child)::after {
+  content: '·';
+  position: absolute;
+  right: -9px;
+  color: rgba(255, 255, 255, 0.3);
 }
 .note {
   color: rgba(255, 255, 255, 0.4);

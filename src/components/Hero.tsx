@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { brand, notices } from '../data/site'
 import { Blossom, ArrowRight } from './icons'
 import styles from './Hero.module.css'
@@ -37,12 +38,12 @@ export default function Hero() {
           <p className={styles.lead}>{brand.positioning}</p>
 
           <div className={styles.cta}>
-            <a href="#products" className="btn btn-primary">
+            <Link to="/products" className="btn btn-primary">
               상품 보러가기 <ArrowRight width={18} height={18} />
-            </a>
-            <a href="#story" className="btn btn-ghost">
+            </Link>
+            <Link to="/about" className="btn btn-ghost">
               농장 이야기
-            </a>
+            </Link>
           </div>
 
           <ul className={styles.chips}>

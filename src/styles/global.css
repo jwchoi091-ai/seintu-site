@@ -82,6 +82,9 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-feature-settings: 'tnum' 0;
+  /* 한글 단어가 줄 끝에서 중간에 쪼개지지 않도록 (띄어쓰기 단위로만 줄바꿈) */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 img,

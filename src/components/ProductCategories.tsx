@@ -1,6 +1,9 @@
+import { Link } from 'react-router-dom'
 import { productCategories } from '../data/site'
 import { Blossom, ArrowRight } from './icons'
 import styles from './ProductCategories.module.css'
+
+const catTo = (slug: string) => (slug === 'all' ? '/products' : `/products?cat=${slug}`)
 
 /** 상품 카테고리 — R규격/수형별 진입 (소개 페이지의 미리보기) */
 export default function ProductCategories() {
@@ -18,16 +21,16 @@ export default function ProductCategories() {
               성목, 외목대·다간까지 원하는 나무를 쉽게 찾아보세요.
             </p>
           </div>
-          <a href="#products" className={`btn btn-ghost ${styles.allBtn}`}>
+          <Link to="/products" className={`btn btn-ghost ${styles.allBtn}`}>
             전체 상품 보기 <ArrowRight width={18} height={18} />
-          </a>
+          </Link>
         </header>
 
         <ul className={styles.grid}>
           {productCategories.map((c) => (
-            <li key={c.label}>
-              <a
-                href={c.href}
+            <li key={c.slug}>
+              <Link
+                to={catTo(c.slug)}
                 className={`${styles.card} ${c.featured ? styles.featured : ''}`}
               >
                 <span className={styles.icon}>
@@ -42,7 +45,7 @@ export default function ProductCategories() {
                 <span className={styles.go}>
                   보기 <ArrowRight width={15} height={15} />
                 </span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { stats } from '../data/site'
+import { stats, flooredStat } from '../data/site'
 import { Blossom } from './icons'
 import styles from './Stats.module.css'
 
@@ -39,8 +39,11 @@ export default function Stats() {
             <div key={s.label} className={styles.stat}>
               <dt className={styles.label}>{s.label}</dt>
               <dd className={`${styles.value} tnum`}>
-                <Counter target={s.value} run={run} />
-                <span className={styles.unit}>{s.unit}</span>
+                <Counter target={flooredStat(s)} run={run} />
+                <span className={styles.unit}>
+                  {s.unit}
+                  {s.plus && <span className={styles.plus}>+</span>}
+                </span>
               </dd>
             </div>
           ))}

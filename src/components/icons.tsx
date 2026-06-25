@@ -24,7 +24,7 @@ export const SearchIcon = (p: IconProps) => (
 
 export const HeartIcon = (p: IconProps) => (
   <svg {...base(p)}>
-    <path d="M12 20s-7-4.4-9.2-8.6C1.3 8.3 2.7 5 6 5c2 0 3.2 1.2 4 2.3C10.8 6.2 12 5 14 5c3.3 0 4.7 3.3 3.2 6.4C19 15.6 12 20 12 20Z" />
+    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
   </svg>
 )
 
@@ -64,6 +64,18 @@ export const ArrowRight = (p: IconProps) => (
 export const ChevronDown = (p: IconProps) => (
   <svg {...base(p)}>
     <path d="m6 9 6 6 6-6" />
+  </svg>
+)
+
+export const ChevronLeft = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="m15 6-6 6 6 6" />
+  </svg>
+)
+
+export const ChevronRight = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="m9 6 6 6-6 6" />
   </svg>
 )
 

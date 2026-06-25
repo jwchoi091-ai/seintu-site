@@ -1,4 +1,5 @@
-import { brand } from '../data/site'
+import { Link } from 'react-router-dom'
+import { brand, business } from '../data/site'
 import { Blossom, SearchIcon, HeartIcon, CartIcon, UserIcon } from './icons'
 import styles from './Header.module.css'
 
@@ -7,13 +8,13 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        <a href="#top" className={styles.logo} aria-label={`${brand.name} 홈`}>
+        <Link to="/" className={styles.logo} aria-label={`${brand.name} 홈`}>
           <Blossom size={42} />
           <span className={styles.logoText}>
             <strong>{brand.name}</strong>
             <em>{brand.tagline}</em>
           </span>
-        </a>
+        </Link>
 
         <form
           className={styles.search}
@@ -30,16 +31,17 @@ export default function Header() {
           </button>
         </form>
 
+        {/* 관심상품·장바구니·마이페이지는 결제를 담당하는 스마트스토어로 연결 (개설 후 URL 교체) */}
         <nav className={styles.utils} aria-label="바로가기">
-          <a href="#album" className={styles.util}>
+          <a href={business.smartStore} className={styles.util} target="_blank" rel="noreferrer">
             <HeartIcon />
             <span>관심상품</span>
           </a>
-          <a href="#products" className={styles.util}>
+          <a href={business.smartStore} className={styles.util} target="_blank" rel="noreferrer">
             <CartIcon />
             <span>장바구니</span>
           </a>
-          <a href="#login" className={styles.util}>
+          <a href={business.smartStore} className={styles.util} target="_blank" rel="noreferrer">
             <UserIcon />
             <span>마이페이지</span>
           </a>

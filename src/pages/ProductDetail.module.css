@@ -1,0 +1,217 @@
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.crumb a:hover {
+  color: var(--green-600);
+}
+.crumb span[aria-hidden] {
+  color: var(--ink-faint);
+}
+
+.top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+
+/* ---------- 갤러리 ---------- */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* ---------- 정보 ---------- */
+.tags {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.tags > span {
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  background: var(--blossom-50);
+  color: var(--blossom-700);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.status {
+  color: #fff !important;
+}
+.sale {
+  background: var(--green-600) !important;
+}
+.reserve {
+  background: var(--amber) !important;
+}
+.sold {
+  background: var(--ink-faint) !important;
+}
+
+.name {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+}
+.summary {
+  margin-top: 12px;
+  color: var(--ink-mute);
+  font-size: 1.02rem;
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 22px 0;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--hairline);
+}
+.price {
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+.priceNote {
+  font-size: 0.88rem;
+  color: var(--ink-mute);
+}
+
+.specs {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 26px;
+}
+.specs tr {
+  border-bottom: 1px solid var(--hairline);
+}
+.specs th {
+  text-align: left;
+  width: 35%;
+  padding: 11px 0;
+  color: var(--ink-mute);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+.specs td {
+  padding: 11px 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.actions .btn {
+  flex: 1;
+  min-width: 160px;
+}
+.disabled {
+  background: var(--ink-faint);
+  pointer-events: none;
+}
+
+.notice {
+  margin-top: 16px;
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+  line-height: 1.5;
+}
+
+/* ---------- 설명 ---------- */
+.desc {
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid var(--hairline);
+}
+.descTitle {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+.desc p {
+  color: var(--ink-2);
+  font-size: 1.02rem;
+  line-height: 1.8;
+  max-width: 70ch;
+}
+
+/* ---------- 관련 상품 ---------- */
+.related {
+  margin-top: 56px;
+}
+.relatedTitle {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.relatedCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.relatedCard strong {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+.relatedCard span {
+  font-weight: 800;
+  color: var(--ink);
+}
+.relatedCard:hover strong {
+  color: var(--green-600);
+}
+
+/* ---------- 미발견 ---------- */
+.missing {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-block: 40px;
+}
+.missing h1 {
+  font-size: 1.6rem;
+}
+.missing p {
+  color: var(--ink-mute);
+}
+.missing .btn {
+  margin-top: 10px;
+}
+
+/* ---------- 반응형 ---------- */
+@media (max-width: 860px) {
+  .top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .relatedGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .actions .btn {
+    flex: 1 1 100%;
+  }
+}

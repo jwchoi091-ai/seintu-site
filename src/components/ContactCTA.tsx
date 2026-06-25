@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { brand } from '../data/site'
 import { MailIcon, ArrowRight, Blossom } from './icons'
 import styles from './ContactCTA.module.css'
@@ -23,9 +24,9 @@ export default function ContactCTA() {
           <a href={`mailto:${brand.email}`} className={`btn btn-blossom ${styles.mailBtn}`}>
             <MailIcon width={18} height={18} /> 이메일로 문의하기
           </a>
-          <a href="#products" className={`btn ${styles.ghost}`}>
+          <Link to="/products" className={`btn ${styles.ghost}`}>
             상품 먼저 둘러보기 <ArrowRight width={18} height={18} />
-          </a>
+          </Link>
           <p className={styles.email}>{brand.email}</p>
         </div>
       </div>

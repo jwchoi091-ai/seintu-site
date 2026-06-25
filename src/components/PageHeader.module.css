@@ -1,0 +1,32 @@
+.wrap {
+  background: linear-gradient(180deg, var(--green-50), var(--canvas));
+  border-bottom: 1px solid var(--hairline);
+  padding-block: clamp(28px, 5vw, 52px);
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+  margin-bottom: 16px;
+}
+.crumb a:hover {
+  color: var(--green-600);
+}
+.crumb span[aria-hidden] {
+  color: var(--ink-faint);
+}
+
+.title {
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  margin-top: 12px;
+}
+
+.lead {
+  margin-top: 14px;
+  max-width: 60ch;
+  color: var(--ink-mute);
+  font-size: 1.05rem;
+}

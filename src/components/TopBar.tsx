@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
+import { business } from '../data/site'
 import styles from './TopBar.module.css'
 
-/** 최상단 유틸리티 바 — 로그인/회원가입/주문조회 등 (회원 기능은 추후 연동) */
+/** 최상단 유틸리티 바 — 회원/주문은 스마트스토어 위임, 문의는 사이트 내 페이지 */
 export default function TopBar() {
   return (
     <div className={styles.bar}>
@@ -9,13 +11,13 @@ export default function TopBar() {
           수사해당화 전문 농장 <strong>수사해당가든</strong>에 오신 것을 환영합니다
         </p>
         <nav className={styles.links} aria-label="회원 메뉴">
-          <a href="#login">로그인</a>
+          <a href={business.smartStore} target="_blank" rel="noreferrer">로그인</a>
           <span className={styles.sep} aria-hidden="true" />
-          <a href="#signup">회원가입</a>
+          <a href={business.smartStore} target="_blank" rel="noreferrer">회원가입</a>
           <span className={styles.sep} aria-hidden="true" />
-          <a href="#orders">주문조회</a>
+          <a href={business.smartStore} target="_blank" rel="noreferrer">주문조회</a>
           <span className={styles.sep} aria-hidden="true" />
-          <a href="#contact">고객문의</a>
+          <Link to="/contact">고객문의</Link>
         </nav>
       </div>
     </div>

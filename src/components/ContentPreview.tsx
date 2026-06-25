@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { contentLinks } from '../data/site'
 import { ArrowRight, Blossom } from './icons'
 import styles from './ContentPreview.module.css'
@@ -20,7 +21,7 @@ export default function ContentPreview() {
 
         <div className={styles.grid}>
           {contentLinks.map((c, i) => (
-            <a key={c.title} href={c.href} className={styles.card}>
+            <Link key={c.title} to={c.href} className={styles.card}>
               <div className={`${styles.thumb} ${styles[`thumb${i}`]}`} aria-hidden="true">
                 <Blossom size={40} petal="#fff" center="var(--blossom-400)" />
               </div>
@@ -32,7 +33,7 @@ export default function ContentPreview() {
                   바로가기 <ArrowRight width={16} height={16} />
                 </span>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>

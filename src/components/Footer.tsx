@@ -1,4 +1,5 @@
-import { brand, mainNav } from '../data/site'
+import { Link } from 'react-router-dom'
+import { brand, business, mainNav } from '../data/site'
 import { Blossom, MailIcon } from './icons'
 import styles from './Footer.module.css'
 
@@ -7,13 +8,13 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.brand}>
-          <a href="#top" className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <Blossom size={34} />
             <span>
               <strong>{brand.name}</strong>
               <em>{brand.tagline}</em>
             </span>
-          </a>
+          </Link>
           <p className={styles.desc}>
             엄마의 꿈에서 시작된 수사해당화 전문 농장. 규격별 묘목 분양과 식재·교육 정보를
             정직하게 나눕니다.
@@ -29,24 +30,27 @@ export default function Footer() {
             <ul>
               {mainNav.map((n) => (
                 <li key={n.label}>
-                  <a href={n.href}>{n.label}</a>
+                  <Link to={n.href}>{n.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
           <div className={styles.col}>
-            <h3>회원</h3>
+            <h3>안내</h3>
             <ul>
-              <li><a href="#login">로그인</a></li>
-              <li><a href="#signup">회원가입</a></li>
-              <li><a href="#orders">주문조회</a></li>
-              <li><a href="#contact">고객문의</a></li>
+              <li><Link to="/about">농장 소개</Link></li>
+              <li><Link to="/contact">고객문의</Link></li>
+              <li><Link to="/notice">공지사항</Link></li>
             </ul>
           </div>
           <div className={styles.col}>
             <h3>곧 만나요</h3>
             <ul>
-              <li><span className={styles.soon}>네이버 스마트스토어</span></li>
+              <li>
+                <a href={business.smartStore} className={styles.soon} target="_blank" rel="noreferrer">
+                  네이버 스마트스토어
+                </a>
+              </li>
               <li><span className={styles.soon}>모바일 앱</span></li>
             </ul>
           </div>
@@ -55,8 +59,19 @@ export default function Footer() {
 
       <div className={styles.legal}>
         <div className="container">
+          <p className={styles.biz}>
+            <span>{business.company}</span>
+            <span>대표 {business.owner}</span>
+            <span>사업자등록번호 {business.bizNo}</span>
+            <span>통신판매업신고 {business.mailOrderNo}</span>
+            <span>{business.address}</span>
+            <span>{business.tel}</span>
+          </p>
           <p>© {new Date().getFullYear()} {brand.name} ({brand.nameEn}). All rights reserved.</p>
-          <p className={styles.note}>본 사이트는 소개용 메인 페이지입니다. 회원·결제 기능은 순차 오픈 예정입니다.</p>
+          <p className={styles.note}>
+            ※ 사업자 정보는 등록 준비 중인 예시값입니다. 결제·회원 기능은 네이버 스마트스토어를
+            통해 순차 오픈됩니다.
+          </p>
         </div>
       </div>
     </footer>

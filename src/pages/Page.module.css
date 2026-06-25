@@ -1,0 +1,244 @@
+/* 보조 페이지 공통 스타일 (About/Album/Blog/Schedule/Contact/Notice 공유) */
+
+.prose {
+  max-width: 72ch;
+}
+.prose h2 {
+  font-size: 1.35rem;
+  margin: 36px 0 14px;
+}
+.prose p {
+  color: var(--ink-2);
+  font-size: 1.04rem;
+  line-height: 1.85;
+  margin-bottom: 16px;
+}
+.prose ul.bullets {
+  margin: 8px 0 20px;
+  padding-left: 4px;
+}
+.prose ul.bullets li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.prose ul.bullets li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blossom-400);
+}
+
+/* 갤러리 그리드 (앨범) */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.galleryItem figcaption {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: var(--ink-mute);
+}
+
+/* 블로그 — 네이버 바로가기 바 */
+.blogBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  border-radius: var(--r-lg);
+}
+.blogBar p {
+  color: var(--ink-2);
+  font-size: 1rem;
+}
+.blogNote {
+  margin-top: 28px;
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+  line-height: 1.6;
+}
+
+/* 카드 리스트 (블로그) */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.cardLink:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.cardBody {
+  padding: 16px 18px 20px;
+}
+.cardTag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: var(--green-50);
+  color: var(--green-700);
+  font-size: 0.74rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.cardBody h3 {
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+.cardBody p {
+  margin-top: 8px;
+  color: var(--ink-mute);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.cardMeta {
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+
+/* 공지 리스트 */
+.notices {
+  border-top: 2px solid var(--ink);
+  max-width: 860px;
+}
+.noticeRow {
+  display: flex;
+  gap: 16px;
+  align-items: baseline;
+  padding: 18px 6px;
+  border-bottom: 1px solid var(--hairline);
+}
+.noticeRow .num {
+  color: var(--ink-faint);
+  font-weight: 700;
+  width: 28px;
+  flex-shrink: 0;
+}
+.noticeRow .txt {
+  flex: 1;
+  font-weight: 600;
+  color: var(--ink);
+}
+.noticeRow .date {
+  color: var(--ink-faint);
+  font-size: 0.88rem;
+  flex-shrink: 0;
+}
+
+/* 문의 폼 + 정보 2단 */
+.contactGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 7px;
+}
+.field input,
+.field textarea {
+  width: 100%;
+  font: inherit;
+  padding: 12px 14px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-sm);
+  background: var(--canvas);
+  color: var(--ink);
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--green-400);
+  box-shadow: 0 0 0 3px var(--green-100);
+}
+.field textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+.formNote {
+  font-size: 0.85rem;
+  color: var(--ink-mute);
+}
+.infoBox {
+  background: var(--green-50);
+  border: 1px solid var(--green-100);
+  border-radius: var(--r-lg);
+  padding: 26px 24px;
+}
+.infoBox h3 {
+  font-size: 1.05rem;
+  margin-bottom: 14px;
+}
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.infoList li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.infoList .infoLabel {
+  font-size: 0.82rem;
+  color: var(--ink-mute);
+  font-weight: 600;
+}
+.infoList .infoValue {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* 반응형 */
+@media (max-width: 860px) {
+  .gallery,
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+@media (max-width: 520px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
