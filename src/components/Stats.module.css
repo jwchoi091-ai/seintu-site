@@ -64,6 +64,7 @@
   font-size: 1rem;
   font-weight: 700;
   color: var(--blossom-100);
+  white-space: nowrap;
 }
 .plus {
   margin-left: 1px;
