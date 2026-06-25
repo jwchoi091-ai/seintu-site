@@ -162,6 +162,11 @@
   flex-direction: column;
   gap: 16px;
 }
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
 .field label {
   display: block;
   font-weight: 600;
@@ -169,7 +174,8 @@
   margin-bottom: 7px;
 }
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   font: inherit;
   padding: 12px 14px;
@@ -179,7 +185,8 @@
   color: var(--ink);
 }
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   outline: none;
   border-color: var(--green-400);
   box-shadow: 0 0 0 3px var(--green-100);
@@ -191,6 +198,70 @@
 .formNote {
   font-size: 0.85rem;
   color: var(--ink-mute);
+}
+
+/* 상품 상세에서 넘어왔을 때 자동 표시되는 문의 상품 배너 */
+.prefill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  background: var(--blossom-50);
+  border: 1px solid var(--blossom-100);
+  border-radius: var(--r-md);
+}
+.prefill span {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--blossom-700);
+}
+.prefill strong {
+  color: var(--ink);
+  font-size: 0.98rem;
+}
+
+/* 전송 완료 / 에러 */
+.formDone {
+  background: var(--blossom-50);
+  border: 1px solid var(--blossom-100);
+  border-radius: var(--r-lg);
+  padding: 32px 28px;
+}
+.formDone h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.formDone p {
+  color: var(--ink-2);
+  line-height: 1.7;
+}
+.formError {
+  background: #fdecec;
+  border: 1px solid #f6c9c9;
+  color: #b3261e;
+  border-radius: var(--r-md);
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+/* 연락처 버튼 묶음 */
+.contactBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+.contactBtns .btn {
+  width: 100%;
+}
+.kakaoBtn {
+  background: #fee500;
+  color: #3a1d1d;
+}
+.kakaoBtn:hover {
+  background: #f5dc00;
 }
 .infoBox {
   background: var(--green-50);
@@ -239,6 +310,9 @@
     gap: 12px;
   }
   .cards {
+    grid-template-columns: 1fr;
+  }
+  .row2 {
     grid-template-columns: 1fr;
   }
 }

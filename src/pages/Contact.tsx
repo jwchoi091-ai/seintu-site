@@ -1,15 +1,27 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { brand, business } from '../data/site'
 import PageHeader from '../components/PageHeader'
-import { MailIcon } from '../components/icons'
+import { MailIcon, ChatIcon, PhoneIcon } from '../components/icons'
 import page from './Page.module.css'
+
+/** form 데이터를 application/x-www-form-urlencoded 문자열로 인코딩 (Netlify Forms 규격) */
+const encode = (data: Record<string, string>) =>
+  Object.keys(data)
+    .map((k) => encodeURIComponent(k) + '=' + encodeURIComponent(data[k]))
+    .join('&')
 
 /**
  * 문의하기 — 견적·상담 폼 + 연락처
- * ⚠️ 폼 전송은 파트 2에서 구현(시트 연동). 지금은 안내 메시지만 표시.
+ * 폼 전송: Netlify Forms (index.html의 숨김 'quote' 폼으로 빌드 감지 → 제출은 사장님 이메일·대시보드로 수집)
+ * 상품 상세에서 넘어오면 ?product= / ?spec= 쿼리로 폼이 자동 채워짐.
  */
 export default function Contact() {
-  const [sent, setSent] = useState(false)
+  const [params] = useSearchParams()
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+
+  const prefillProduct = params.get('product') ?? ''
+  const prefillSpec = params.get('spec') ?? ''
 
   const info: { label: string; value: string }[] = [
     { label: '상호', value: business.company },
@@ -17,6 +29,31 @@ export default function Contact() {
     { label: '이메일', value: brand.email },
     { label: '주소', value: business.address },
   ]
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const data = new FormData(form)
+    const obj: Record<string, string> = { 'form-name': 'quote' }
+    data.forEach((v, k) => {
+      obj[k] = typeof v === 'string' ? v : ''
+    })
+
+    setStatus('sending')
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode(obj),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(String(res.status))
+        setStatus('sent')
+        form.reset()
+      })
+      .catch(() => setStatus('error'))
+  }
+
+  const hasKakao = business.kakaoChannel !== '#'
 
   return (
     <>
@@ -29,57 +66,121 @@ export default function Contact() {
       <section className="section">
         <div className={`container ${page.contactGrid}`}>
           {/* 폼 */}
-          <form
-            className={page.form}
-            onSubmit={(e) => {
-              e.preventDefault()
-              setSent(true)
-            }}
-          >
-            <div className={page.field}>
-              <label htmlFor="name">성함</label>
-              <input id="name" name="name" required placeholder="홍길동" />
-            </div>
-            <div className={page.field}>
-              <label htmlFor="phone">연락처</label>
-              <input id="phone" name="phone" required placeholder="010-0000-0000" />
-            </div>
-            <div className={page.field}>
-              <label htmlFor="spec">희망 규격·수량</label>
-              <input id="spec" name="spec" placeholder="예: R8 외목대 5주" />
-            </div>
-            <div className={page.field}>
-              <label htmlFor="message">문의 내용</label>
-              <textarea
-                id="message"
-                name="message"
-                placeholder="식재 지역, 배송·식재 필요 여부 등을 적어 주세요."
-              />
-            </div>
-
-            {sent ? (
-              <p
-                style={{
-                  background: 'var(--blossom-50)',
-                  border: '1px solid var(--blossom-100)',
-                  color: 'var(--blossom-700)',
-                  borderRadius: 'var(--r-md)',
-                  padding: '14px 16px',
-                  fontWeight: 600,
-                }}
-              >
-                문의가 접수되었습니다. (※ 현재는 데모 단계로 실제 전송되지 않습니다 — 빠른 상담은
-                전화·이메일을 이용해 주세요.)
+          {status === 'sent' ? (
+            <div className={page.formDone}>
+              <h3>문의가 접수되었습니다 🌸</h3>
+              <p>
+                남겨주신 내용을 확인하는 대로 연락드리겠습니다. 빠른 상담이 필요하시면 아래
+                전화·카카오톡으로 문의해 주세요.
               </p>
-            ) : (
-              <button type="submit" className="btn btn-blossom" style={{ alignSelf: 'flex-start' }}>
-                문의 보내기
+              <button
+                type="button"
+                className="btn btn-ghost"
+                onClick={() => setStatus('idle')}
+                style={{ marginTop: 6 }}
+              >
+                새 문의 작성하기
               </button>
-            )}
-            <p className={page.formNote}>
-              * 폼 전송 기능은 준비 중입니다. 우선 아래 연락처로 문의해 주세요.
-            </p>
-          </form>
+            </div>
+          ) : (
+            <form
+              className={page.form}
+              name="quote"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleSubmit}
+            >
+              {/* Netlify 식별용 숨김 필드 + 스팸 방지 허니팟 */}
+              <input type="hidden" name="form-name" value="quote" />
+              <p hidden>
+                <label>
+                  사람이 아니면 입력: <input name="bot-field" />
+                </label>
+              </p>
+
+              {prefillProduct && (
+                <div className={page.prefill}>
+                  <span>문의 상품</span>
+                  <strong>{prefillProduct}</strong>
+                </div>
+              )}
+              <input type="hidden" name="product" value={prefillProduct} />
+
+              <div className={page.row2}>
+                <div className={page.field}>
+                  <label htmlFor="name">성함</label>
+                  <input id="name" name="name" required placeholder="홍길동" />
+                </div>
+                <div className={page.field}>
+                  <label htmlFor="phone">연락처</label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    placeholder="010-0000-0000"
+                  />
+                </div>
+              </div>
+
+              <div className={page.field}>
+                <label htmlFor="spec">희망 규격·수량</label>
+                <input
+                  id="spec"
+                  name="spec"
+                  defaultValue={prefillSpec}
+                  placeholder="예: R8 외목대 5주"
+                />
+              </div>
+
+              <div className={page.row2}>
+                <div className={page.field}>
+                  <label htmlFor="region">식재 지역</label>
+                  <input id="region" name="region" placeholder="예: 충남 예산군" />
+                </div>
+                <div className={page.field}>
+                  <label htmlFor="planting">식재 시공</label>
+                  <select id="planting" name="planting" defaultValue="">
+                    <option value="" disabled>
+                      선택해 주세요
+                    </option>
+                    <option value="나무만 구매">나무만 구매</option>
+                    <option value="식재 시공 필요">식재 시공 필요</option>
+                    <option value="상담 후 결정">상담 후 결정</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className={page.field}>
+                <label htmlFor="message">문의 내용</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  placeholder="배송·식재 일정, 현장 조건 등 자유롭게 적어 주세요."
+                />
+              </div>
+
+              {status === 'error' && (
+                <p className={page.formError}>
+                  전송 중 문제가 발생했습니다. 잠시 후 다시 시도하시거나 전화·이메일로 문의해
+                  주세요.
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="btn btn-blossom"
+                style={{ alignSelf: 'flex-start' }}
+                disabled={status === 'sending'}
+              >
+                {status === 'sending' ? '보내는 중…' : '문의 보내기'}
+              </button>
+              <p className={page.formNote}>
+                * 남겨주신 연락처로만 답변에 사용하며, 상담 외 용도로 쓰지 않습니다.
+              </p>
+            </form>
+          )}
 
           {/* 연락처 */}
           <aside className={page.infoBox}>
@@ -92,13 +193,25 @@ export default function Contact() {
                 </li>
               ))}
             </ul>
-            <a
-              href={`mailto:${brand.email}`}
-              className="btn btn-primary"
-              style={{ marginTop: 18, width: '100%' }}
-            >
-              <MailIcon width={18} height={18} /> 이메일로 문의
-            </a>
+
+            <div className={page.contactBtns}>
+              {hasKakao && (
+                <a
+                  href={business.kakaoChannel}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`btn ${page.kakaoBtn}`}
+                >
+                  <ChatIcon width={18} height={18} /> 카카오톡 상담
+                </a>
+              )}
+              <a href={`tel:${business.tel.replace(/[^0-9]/g, '')}`} className="btn btn-primary">
+                <PhoneIcon width={18} height={18} /> 전화 문의
+              </a>
+              <a href={`mailto:${brand.email}`} className="btn btn-ghost">
+                <MailIcon width={18} height={18} /> 이메일 문의
+              </a>
+            </div>
           </aside>
         </div>
       </section>

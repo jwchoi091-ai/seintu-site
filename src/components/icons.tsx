@@ -86,6 +86,18 @@ export const MailIcon = (p: IconProps) => (
   </svg>
 )
 
+export const ChatIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 9 9 0 0 1-3.8-.8L3 21l1.3-4.2A8.38 8.38 0 0 1 3.5 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5Z" />
+  </svg>
+)
+
+export const PhoneIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M5 4h3.5l1.5 4.5L8 10a12 12 0 0 0 6 6l1.5-2 4.5 1.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" />
+  </svg>
+)
+
 export const SproutIcon = (p: IconProps) => (
   <svg {...base(p)}>
     <path d="M12 20v-6" />

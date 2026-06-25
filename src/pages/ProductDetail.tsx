@@ -27,6 +27,14 @@ export default function ProductDetail() {
 
   const isQuote = product.price === null
   const soldOut = product.status === '품절'
+
+  // 견적 폼으로 상품명·규격 전달 (Contact 페이지가 ?product=/?spec= 으로 자동 채움)
+  const specHint = [product.grade, product.form !== '-' ? product.form : '']
+    .filter(Boolean)
+    .join(' ')
+  const quoteHref = `/contact?product=${encodeURIComponent(product.name)}&spec=${encodeURIComponent(
+    specHint,
+  )}`
   const related = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4)
@@ -92,7 +100,7 @@ export default function ProductDetail() {
 
             <div className={styles.actions}>
               {isQuote ? (
-                <Link to="/contact" className="btn btn-blossom">
+                <Link to={quoteHref} className="btn btn-blossom">
                   견적 문의하기 <ArrowRight width={18} height={18} />
                 </Link>
               ) : (
@@ -104,8 +112,8 @@ export default function ProductDetail() {
                   {soldOut ? '품절' : '스토어에서 구매하기'}
                 </a>
               )}
-              <Link to="/contact" className="btn btn-ghost">
-                전화·현장 문의
+              <Link to={quoteHref} className="btn btn-ghost">
+                견적·문의하기
               </Link>
             </div>
             <p className={styles.notice}>
