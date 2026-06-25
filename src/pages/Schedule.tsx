@@ -18,13 +18,12 @@ const typeKey: Record<string, string> = {
 /** 농장 일정 — 달력(메인) + 월별 목록(오른쪽) */
 export default function Schedule() {
   const today = new Date()
-  const year = today.getFullYear()
-  const isThisMonth = (m: number) => m === today.getMonth() + 1
+  const isThisMonth = (y: number, m: number) =>
+    y === today.getFullYear() && m === today.getMonth() + 1
 
+  const [year, setYear] = useState(today.getFullYear())
   const [month, setMonth] = useState(today.getMonth() + 1) // 1~12
-  const [selectedDay, setSelectedDay] = useState<number | null>(
-    isThisMonth(today.getMonth() + 1) ? today.getDate() : null,
-  )
+  const [selectedDay, setSelectedDay] = useState<number | null>(today.getDate())
 
   // 이번 달 일정
   const monthEvents = farmEvents.filter((e) => e.month === month)
@@ -41,13 +40,14 @@ export default function Schedule() {
     ...Array.from({ length: daysInMonth }, (_, i) => i + 1),
   ]
 
-  // 월 이동
-  const goMonth = (m: number) => {
+  // 월 이동 — 연도 경계를 넘을 때 year도 갱신
+  const goMonth = (y: number, m: number) => {
+    setYear(y)
     setMonth(m)
-    setSelectedDay(isThisMonth(m) ? today.getDate() : null)
+    setSelectedDay(isThisMonth(y, m) ? today.getDate() : null)
   }
-  const prevMonth = () => goMonth(month === 1 ? 12 : month - 1)
-  const nextMonth = () => goMonth(month === 12 ? 1 : month + 1)
+  const prevMonth = () => month === 1 ? goMonth(year - 1, 12) : goMonth(year, month - 1)
+  const nextMonth = () => month === 12 ? goMonth(year + 1, 1) : goMonth(year, month + 1)
 
   // 오른쪽 목록: 일정이 있는 달
   const monthsWithEvents = [...new Set(farmEvents.map((e) => e.month))].sort((a, b) => a - b)
@@ -96,7 +96,7 @@ export default function Schedule() {
                 if (day === null) return <div key={`b${i}`} className={styles.empty} />
                 const dayEvents = eventByDay.get(day) ?? []
                 const hasEvent = dayEvents.length > 0
-                const isToday = isThisMonth(month) && day === today.getDate()
+                const isToday = isThisMonth(year, month) && day === today.getDate()
                 const isSelected = day === selectedDay
                 return (
                   <button
@@ -167,7 +167,7 @@ export default function Schedule() {
                   <li key={m}>
                     <button
                       className={`${styles.monthBtn} ${m === month ? styles.monthActive : ''}`}
-                      onClick={() => goMonth(m)}
+                      onClick={() => goMonth(today.getFullYear(), m)}
                     >
                       <span className={styles.monthLabel}>{m}월</span>
                       <span className={styles.monthSummary}>
