@@ -35,6 +35,7 @@ export default function ProductDetail() {
   const quoteHref = `/contact?product=${encodeURIComponent(product.name)}&spec=${encodeURIComponent(
     specHint,
   )}`
+  const telDigits = business.tel.replace(/[^0-9]/g, '')
   const related = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4)
@@ -112,9 +113,15 @@ export default function ProductDetail() {
                   {soldOut ? '품절' : '스토어에서 구매하기'}
                 </a>
               )}
-              <Link to={quoteHref} className="btn btn-ghost">
-                견적·문의하기
-              </Link>
+              {isQuote ? (
+                <a href={`tel:${telDigits}`} className="btn btn-ghost">
+                  전화 문의
+                </a>
+              ) : (
+                <Link to={quoteHref} className="btn btn-ghost">
+                  견적·문의하기
+                </Link>
+              )}
             </div>
             <p className={styles.notice}>
               ※ 결제는 네이버 스마트스토어에서 진행됩니다. 대형목·대량 분양은 견적 문의를 이용해
