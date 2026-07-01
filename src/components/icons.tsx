@@ -98,6 +98,21 @@ export const PhoneIcon = (p: IconProps) => (
   </svg>
 )
 
+export const SmsIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 3v-3H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z" />
+    <path d="M8 10h.01M12 10h.01M16 10h.01" />
+  </svg>
+)
+
+export const QuestionIcon = (p: IconProps) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M9.5 9.5a2.5 2.5 0 0 1 4.5 1.5c0 1.7-2 2-2 3.2" />
+    <path d="M12 17h.01" />
+  </svg>
+)
+
 export const SproutIcon = (p: IconProps) => (
   <svg {...base(p)}>
     <path d="M12 20v-6" />

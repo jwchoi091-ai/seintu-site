@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { brand, business } from '../data/site'
+import { brand, business, faqs } from '../data/site'
 import PageHeader from '../components/PageHeader'
-import { MailIcon, ChatIcon, PhoneIcon } from '../components/icons'
+import { ChatIcon, PhoneIcon, SmsIcon, QuestionIcon } from '../components/icons'
 import page from './Page.module.css'
 
 /** form 데이터를 application/x-www-form-urlencoded 문자열로 인코딩 (Netlify Forms 규격) */
@@ -54,6 +54,7 @@ export default function Contact() {
   }
 
   const hasKakao = business.kakaoChannel !== '#'
+  const telDigits = business.tel.replace(/[^0-9]/g, '')
 
   return (
     <>
@@ -194,6 +195,7 @@ export default function Contact() {
               ))}
             </ul>
 
+            <p className={page.quickTitle}>바로 상담하기</p>
             <div className={page.contactBtns}>
               {hasKakao && (
                 <a
@@ -205,14 +207,39 @@ export default function Contact() {
                   <ChatIcon width={18} height={18} /> 카카오톡 상담
                 </a>
               )}
-              <a href={`tel:${business.tel.replace(/[^0-9]/g, '')}`} className="btn btn-primary">
+              <a href={`sms:${telDigits}`} className="btn btn-ghost">
+                <SmsIcon width={18} height={18} /> 문자 문의
+              </a>
+              <a href={`tel:${telDigits}`} className="btn btn-primary">
                 <PhoneIcon width={18} height={18} /> 전화 문의
               </a>
-              <a href={`mailto:${brand.email}`} className="btn btn-ghost">
-                <MailIcon width={18} height={18} /> 이메일 문의
-              </a>
             </div>
+            <p className={page.formNote} style={{ marginTop: 12 }}>
+              이메일: <a href={`mailto:${brand.email}`} style={{ color: 'var(--green-700)' }}>{brand.email}</a>
+            </p>
           </aside>
+        </div>
+      </section>
+
+      {/* 자주 묻는 질문 */}
+      <section className="section" style={{ paddingTop: 0 }} aria-labelledby="faq-title">
+        <div className="container">
+          <span className="eyebrow">
+            <QuestionIcon width={18} height={18} /> 자주 묻는 질문
+          </span>
+          <h2 id="faq-title" className="section-title" style={{ marginBottom: 8 }}>
+            문의 전에 확인해 보세요
+          </h2>
+          <ul className={page.faqList}>
+            {faqs.map((f) => (
+              <li key={f.q}>
+                <details className={page.faqItem}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </>
